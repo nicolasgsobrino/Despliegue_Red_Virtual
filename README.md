@@ -1,10 +1,10 @@
 # Práctica Creativa 1 CDPS 2024/25
 
-Este proyecto implementa un script en Python para gestionar un escenario de máquinas virtuales (VMs) y redes virtuales utilizando herramientas como `virsh`, `qemu-img`, y `ovs-vsctl`. Está diseñado para trabajar en un entorno Debian configurado con el script `/lab/cnvr/bin/prepare-vnx-debian`.
+Este proyecto implementa un script en Python para gestionar un escenario de máquinas virtuales (VMs) y redes virtuales utilizando herramientas como `virsh`, `qemu-img`, y `ovs-vsctl` con el escenario de la práctica 2. Está diseñado para trabajar en un entorno Debian configurado con el script `/lab/cnvr/bin/prepare-vnx-debian` que hemos implementado en el propio scrypt para que se haga automáticamente. 
 
 ---
 
-## **Autores**
+## **Alumnos**
 
 - Nicolas García Sobrino, nicolas.garciasobrino@alumnos.upm.es,
 - Javier de Ponte Hernando, s.rayan@alumnos.upm.es
@@ -21,7 +21,7 @@ Este proyecto implementa un script en Python para gestionar un escenario de máq
    - `start`: Inicia todas las máquinas virtuales o una en particular.
    - `stop`: Detiene todas las máquinas virtuales o una específica.
    - `destroy`: Elimina el escenario y las configuraciones creadas.
-   - `monitor`: Muestra el estado de las máquinas virtuales y redes del escenario.
+   - `monitor`: Muestra el estado de las máquinas virtuales y redes del escenario. (OPCIONAL)
 
 2. **`lib_vm.py`**  
    Librería que contiene las clases y funciones necesarias para gestionar máquinas virtuales (`VM`) y redes virtuales (`NET`).
@@ -45,28 +45,14 @@ Este proyecto implementa un script en Python para gestionar un escenario de máq
 
 ---
 
-## **Requisitos del sistema**
-
-- **Sistema operativo**: Debian o derivado.
-- **Dependencias**:
-  - Python 3.x
-  - Paquetes de Python: `lxml`, `logging`
-  - Herramientas de virtualización:
-    - `qemu-img`
-    - `virsh`
-    - `ovs-vsctl`
-    - `virt-copy-in`
-    - `virt-edit`
-
----
-
 ## **Configuración previa**
 
-1. **Preparar el entorno**  
+1. **Preparar el entorno**  (
    Antes de ejecutar el script, ejecute el siguiente comando en su terminal para configurar el entorno del laboratorio:
    ```bash
    /lab/cnvr/bin/prepare-vnx-debian
    ```
+En nuestro caso lo hemos metido como mejora OPCIONAL dentro del comando create para que se ejecute automáticamente (descripción en el código). 
 
 2. **Editar el archivo de configuración (`manage-p2.json`)**  
    Ejemplo de configuración:
@@ -96,7 +82,7 @@ El script `manage-p2.py` acepta los siguientes comandos:
    python3 manage-p2.py start
    ```
 
-- **Iniciar una VM específica**  
+- **Iniciar una VM específica (MEJORA OPCIONAL)**  
    ```bash
    python3 manage-p2.py start <vm_name>
    ```
@@ -110,7 +96,7 @@ El script `manage-p2.py` acepta los siguientes comandos:
    python3 manage-p2.py stop
    ```
 
-- **Detener una VM específica**  
+- **Detener una VM específica (MEJORA OPCIONAL)**  
    ```bash
    python3 manage-p2.py stop <vm_name>
    ```
@@ -124,32 +110,10 @@ El script `manage-p2.py` acepta los siguientes comandos:
    python3 manage-p2.py destroy
    ```
 
-- **Monitorizar el estado del escenario**  
+- **Monitorizar el estado del escenario (MEJORA OPCIONAL)**  
    ```bash
    python3 manage-p2.py monitor
    ```
-
----
-
-## **Funcionalidades principales**
-
-1. **Creación de VMs**  
-   - Generación de archivos de disco (`qcow2`) a partir de una imagen base.
-   - Configuración personalizada de archivos XML para cada VM.
-   - Configuración de red específica para cada VM.
-
-2. **Gestión de redes virtuales**  
-   - Creación y eliminación de puentes (`LAN1`, `LAN2`) utilizando `ovs-vsctl`.
-
-3. **Arranque y apagado de VMs**  
-   - Uso de `virsh` para manejar el ciclo de vida de las VMs.
-
-4. **Monitorización del escenario**  
-   - Comando para inspeccionar el estado de todas las VMs y redes.
-
-5. **Soporte para configuraciones dinámicas**  
-   - Configuración del número de servidores y nivel de detalle desde un archivo JSON.
-
 ---
 
 ## **Notas importantes**
