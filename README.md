@@ -6,9 +6,10 @@ Este proyecto implementa un script en Python para gestionar un escenario de máq
 
 ## **Autores**
 
-Nicolas García Sobrino, Javier de Ponte Hernando y Santiago Rayán Castro.
-nicolas.garciasobrino@alumnos.upm.es, j.deponteh@alumnos.upm.es y s.rayan@alumnos.upm.es
-
+- Nicolas García Sobrino, nicolas.garciasobrino@alumnos.upm.es,
+- Javier de Ponte Hernando, s.rayan@alumnos.upm.es
+- Santiago Rayán Castro, s.rayan@alumnos.upm.es
+ 
 ---
 
 ## **Estructura del Proyecto**
