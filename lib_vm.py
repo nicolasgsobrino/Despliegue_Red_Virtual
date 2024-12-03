@@ -4,7 +4,7 @@ from lxml import etree
 
 log = logging.getLogger('manage-p2')
 
-servers = ["s1", "s2", "s3", "s4" ,"s5"]
+servidores = ["s1", "s2", "s3", "s4" ,"s5"]
 
 bridges = {
           "c1":["LAN1"],
