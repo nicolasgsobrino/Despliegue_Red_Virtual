@@ -91,10 +91,12 @@ def create(number_of_servers):
     LAN1.create_net()
     LAN2 = NET("LAN2")
     LAN2.create_net()
-
     # Configurar las redes
     subprocess.call(["sudo", "ifconfig", "LAN1", "10.1.1.3/24"])  # Asignar IP a LAN1
     subprocess.call(["sudo", "ip", "route", "add", "10.1.0.0/16", "via", "10.1.1.1"])  # Ruta para el tráfico
+
+    with open('manage-p2.json', 'w') as json_file: # Actualiza el JSON para que "number of servers cambie al valor introducido en el create (asi los demas comandos funcionan bien)"
+        json.dump(json_data, json_file, indent=4)
 
     logger.debug("Red creada correctamente")
 
@@ -109,12 +111,15 @@ def start(vm):
         lb = VM('lb')
         lb.start_vm()
 
-        for n in range(0, number_of_servers):
-          VM(f"s{n+1}").start_vm()
-        logger.debug("Todas las VMs arrancadas correctamente")
+        for n in range(0,number_of_servers):
+            rango = str(n+1)
+            name = "s" + rango
+            server = VM(str(name))
+            server.start_vm()
     else:
-        VM(vm).start_vm()
-        logger.debug(f"VM: {server} arrancada")
+        server = VM(vm)
+        server.start_vm()
+
 
 # Función para detener las VMs
 def stop(vm):
@@ -186,10 +191,7 @@ if len(arguments) == 2:
         monitor()
 
 if len(arguments) == 3:
-    if arguments[1] == "create":
-        for vm in arguments[2:]:
-            create(vm)
-    elif arguments[1] == "start":
+    if arguments[1] == "start":
         for vm in arguments[2:]:
             start(vm)
     elif arguments[1] == "stop":
